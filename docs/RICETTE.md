@@ -3,7 +3,7 @@
 Prima di ogni ricetta: `git status --short`. Dopo: vedi "Pubblicare e verificare" in fondo. Dove sta cosa: `docs/MAPPA.md`. Errori gia' fatti: `docs/ERRORI_NOTI.md`.
 
 ## Nuovo sito da questo template
-1. Dalla cartella padre: `.\nuovo_sito.ps1 -Nome villarossa -Brand "Villa Rossa" -Descrizione "..." -Lingue it,en [-Whatsapp 39333...] [-Accento "#0e7490"] [-Shop]`
+1. Dalla cartella padre: `.\nuovo_sito.ps1 -Nome villarossa -Brand "Villa Rossa" -Descrizione "..." -Lingue it,en [-Whatsapp 39333...] [-Accento "#8a6a3a"] [-Shop]`
 2. Fa da solo: cartella, repo GitHub, Pages. Non scrive `url:`/`baseurl:`.
 3. A mano restano: `contact_endpoint`, `whatsapp`, email in `_config.yml`, testi della home (admin > Home), foto di esempio.
 4. Cercare residui: `Select-String -Path (Get-ChildItem -Recurse -File -Exclude .git) -Pattern "gamingcorp|edilextreme"` (deve dare zero).

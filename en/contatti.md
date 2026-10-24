@@ -4,7 +4,7 @@ title: "Contact"
 ref: contatti
 lang: en
 locale: en
-tr: tradotto
+tr: da_aggiornare
 tr_hash: e563ea
 permalink: /en/contact/
 ---
@@ -41,16 +41,16 @@ permalink: /en/contact/
 .cf-form input[type=text],.cf-form input[type=email],.cf-form input[type=tel],.cf-form textarea{display:block;width:100%;box-sizing:border-box;margin:0;padding:.75rem .9rem;font:inherit;font-size:1rem;line-height:1.4;color:inherit;background:#fff;border:1px solid rgba(0,0,0,.2);border-radius:8px}
 .cf-form ::placeholder{opacity:.5}
 .cf-form textarea{min-height:9rem;resize:vertical}
-.cf-form input:focus,.cf-form textarea:focus{outline:2px solid var(--t-accent,#0e7490);outline-offset:1px}
-.cf-form .cf-btn{display:block;width:100%;margin:1.5rem 0 0;padding:1rem 1.5rem;border:0;border-radius:8px;background:var(--t-accent,#0e7490);color:#fff;font-size:1.05rem;font-weight:700;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease,filter .15s ease}
+.cf-form input:focus,.cf-form textarea:focus{outline:2px solid var(--t-accent,#8a6a3a);outline-offset:1px}
+.cf-form .cf-btn{display:block;width:100%;margin:1.5rem 0 0;padding:1rem 1.5rem;border:0;border-radius:8px;background:var(--t-accent,#8a6a3a);color:#fff;font-size:1.05rem;font-weight:700;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease,filter .15s ease}
 .cf-form .cf-btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
 .cf-form .cf-btn:active{transform:translateY(0)}
-.cf-form .cf-btn:focus-visible{outline:3px solid var(--t-accent,#0e7490);outline-offset:3px}
+.cf-form .cf-btn:focus-visible{outline:3px solid var(--t-accent,#8a6a3a);outline-offset:3px}
 .cf-form .cf-btn:disabled{opacity:.65;cursor:progress;transform:none;box-shadow:none}
 @media (prefers-reduced-motion:reduce){.cf-form .cf-btn{transition:none}.cf-form .cf-btn:hover{transform:none}}
 .cf-nota{margin:.8rem 0 0;font-size:.85rem;opacity:.7;text-align:center}
 /* Esito = notifica fissa in alto (sempre visibile), sparisce da sola dopo 4 secondi (vedi mostra() nello script) */
-#cf-esito{position:fixed;top:1rem;left:50%;transform:translate(-50%,-150%);z-index:99999;max-width:min(92vw,480px);padding:.9rem 1.3rem;border-radius:10px;background:var(--t-accent,#0e7490);color:#fff;font-weight:600;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:transform .3s ease,opacity .3s ease}
+#cf-esito{position:fixed;top:1rem;left:50%;transform:translate(-50%,-150%);z-index:99999;max-width:min(92vw,480px);padding:.9rem 1.3rem;border-radius:10px;background:var(--t-accent,#8a6a3a);color:#fff;font-weight:600;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:transform .3s ease,opacity .3s ease}
 #cf-esito.cf-visibile{transform:translate(-50%,0);opacity:1}
 #cf-esito.cf-errore{background:#b00020}
 </style>

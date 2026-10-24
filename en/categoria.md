@@ -6,7 +6,7 @@ classes: wide
 ref: categoria
 lang: en
 locale: en
-tr: tradotto
+tr: da_aggiornare
 tr_hash: 1bk11xf
 permalink: /en/category/
 ---
@@ -17,11 +17,11 @@ permalink: /en/category/
 .cat-header{margin-bottom:1.6em}
 .cat-header-name{font-family:'Playfair Display',Georgia,serif;font-size:2em;font-weight:500;color:#141414;margin:0 0 .3em}
 .cat-header-desc{font-size:15px;color:#6b665f;margin:0;line-height:1.6;max-width:62ch}
-.cat-back{font-size:13px;color:#0e7490;text-decoration:none;display:inline-block;margin-bottom:1.2em}
+.cat-back{font-size:13px;color:#8a6a3a;text-decoration:none;display:inline-block;margin-bottom:1.2em}
 .cat-back:hover{text-decoration:underline}
 .art-list{display:flex;flex-direction:column;gap:1.1rem}
 .art-row{display:grid;grid-template-columns:clamp(220px,34%,320px) 1fr;background:#fff;border:1px solid #e9e3d9;border-radius:18px;overflow:hidden;text-decoration:none;color:inherit;transition:border-color .2s,box-shadow .2s}
-.art-row:hover{border-color:#7fd8e6;box-shadow:0 6px 22px rgba(14,80,100,.08);text-decoration:none}
+.art-row:hover{border-color:#d9c3a0;box-shadow:0 6px 22px rgba(14,80,100,.08);text-decoration:none}
 .art-row:focus-visible{outline:3px solid #0e9bb5;outline-offset:3px}
 .art-row-media{position:relative;min-height:190px;background:#f3eee6}
 .art-row-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}

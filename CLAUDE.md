@@ -73,3 +73,5 @@ Lezioni dalla migrazione "pelletteria" -> "pelletteria2" (24/10/2026)
 - Togliere i segnaposto che non servono (`_pages/servizi.md`, articolo di esempio, categoria/prodotto di esempio): restano online e indicizzati.
 - Il modulo contatti resta spento senza `contact_endpoint` (il vecchio sito usava il worker del modello: non riusarlo, serve il worker del cliente).
 - Il template ha molti file non committati: modificare il template solo nel working tree e NON usare `pubblica.ps1 -Tutto` li'.
+
+- TEMA PELLE (24/10/2026): niente colori ghiaccio/teal hardcoded; palette in _data/tema.json (accent #8a6a3a, accent_dark #503629). Sfondo home = assets/images/leather-hero.jpg generato da automation/genera_texture.py; logo da automation/genera_logo.py. Footer: credito webtomars.it in _includes/footer/custom.html (site.footer_text lo sovrascrive).
