@@ -19,7 +19,7 @@
 # default_lang = lingua alla radice (/). Le altre stanno in /xx/ e le crea l'admin > Lingue.
 # languages = elenco lingue attive: sono i nomi delle cartelle (it alla radice, en in /en/).
 locale: "it"
-default_lang: it,en
+default_lang: it
 languages: [it,en]
 
 # --- IDENTITA' DEL SITO (da cambiare per ogni clone) -----------------------------------
