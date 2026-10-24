@@ -1,6 +1,14 @@
 [
   {
-    "nome": "blog",
-    "descrizione": "Novita', approfondimenti e dietro le quinte"
+    "nome": "guide",
+    "descrizione": "Guide e consigli sugli articoli in pelle"
+  },
+  {
+    "nome": "cura-della-pelle",
+    "descrizione": "Come pulire, curare e far durare la pelle"
+  },
+  {
+    "nome": "novita",
+    "descrizione": "Novità e nuovi arrivi"
   }
 ]

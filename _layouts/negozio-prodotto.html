@@ -15,12 +15,12 @@ PUNTI CRITICI
 {%- assign nz_lh = '/' -%}{%- if page.lang and page.lang != site.default_lang -%}{%- assign nz_lh = '/' | append: page.lang | append: '/' -%}{%- endif -%}
 {%- assign nz_p = site.data.catalogo.prodotti | where: 'id', page.pid | first -%}
 {%- if site.ecommerce != true or nz_p == nil or nz_p.visibile == false -%}
-<p>Questo prodotto non &egrave; disponibile. <a href="{{ nz_lh | append: 'negozio/' | relative_url }}">Torna al negozio</a></p>
+<p>Questo prodotto non &egrave; disponibile. <a href="{% include shop-url.html k="shop" %}">Torna al negozio</a></p>
 {%- else -%}
 {%- assign nz_c = site.data.catalogo.categorie | where: 'id', nz_p.categoria | first -%}
 {%- assign nz_dig = false -%}{%- if nz_p.tipo == 'digitale' -%}{%- assign nz_dig = true -%}{%- endif -%}
 <div id="negozio" class="nz-pp" data-worker="">
-<nav class="nz-brd" aria-label="Percorso"><a href="{{ nz_lh | append: 'negozio/' | relative_url }}">Negozio</a>{% if nz_c %} &rsaquo; <a href="{{ nz_lh | append: 'negozio/categoria/' | append: nz_c.id | append: '/' | relative_url }}">{{ nz_c.nome }}</a>{% endif %} &rsaquo; <span>{{ nz_p.nome }}</span></nav>
+<nav class="nz-brd" aria-label="Percorso"><a href="{% include shop-url.html k="shop" %}">Negozio</a>{% if nz_c %} &rsaquo; <a href="{% include shop-url.html k="cat" id=nz_c.id %}">{{ nz_c.tr[page.lang].nome | default: nz_c.nome }}</a>{% endif %} &rsaquo; <span>{{ nz_p.tr[page.lang].nome | default: nz_p.nome }}</span></nav>
 <div class="nz-pp-grid">
 <div class="nz-pp-media">
 {%- if nz_p.immagine and nz_p.immagine != '' -%}
@@ -47,6 +47,6 @@ PUNTI CRITICI
 <p>{{ nz_p.tr[page.lang].descrizione | default: nz_p.descrizione | escape }}</p>
 {%- endif -%}
 </section>
-<p class="nz-pp-torna"><a href="{{ nz_lh | append: 'negozio/' | relative_url }}">&larr; Torna al negozio</a> &middot; <a href="{{ nz_lh | append: 'carrello/' | relative_url }}">Vai al carrello</a></p>
+<p class="nz-pp-torna"><a href="{% include shop-url.html k="shop" %}">&larr; Torna al negozio</a> &middot; <a href="{{ nz_lh | append: 'carrello/' | relative_url }}">Vai al carrello</a></p>
 </div>
 {%- endif -%}

@@ -1,36 +1,257 @@
 {
-  "_nota": "Catalogo dello shop (serve solo con ecommerce: true in _config.yml). Prezzi in CENTESIMI. Ogni prodotto/categoria ha anche una pagina in _negozio/ (layout negozio-prodotto con pid=<id>, negozio-categoria con cid=<id>). L'id categoria e' riservato. tipo: digitale (niente spedizione) o fisico. visibile:false nasconde senza cancellare. TRADUZIONI: ogni categoria/prodotto puo' avere \"tr\": {\"en\": {\"nome\": \"...\", \"descrizione\": \"...\", \"descrizione_completa\": \"...\"}}; campo mancante = si usa l'italiano.",
+  "_nota": "PELLETTERIA. Reparti Donna e Uomo; le sottocategorie hanno il campo \"genitore\". Prezzi in CENTESIMI. Fonte UNICA di /negozio/ e delle pagine prodotto. L'id categoria e' riservato. TRADUZIONI: ogni categoria/prodotto puo' avere \"tr\": {\"en\": {\"nome\": \"...\", \"descrizione\": \"...\", \"descrizione_completa\": \"...\"}}; campo mancante = si usa l'italiano. Ogni categoria ha anche due pagine con campo ref \"shop-cat-<id>\" (_negozio/categoria-<id>.md e en/negozio/categoria/<id>.md).",
   "categorie": [
     {
-      "nome": "Esempio",
-      "id": "esempio",
-      "icona": "🛍️",
+      "id": "donna",
+      "nome": "Donna",
+      "icona": "",
       "tr": {
         "en": {
-          "nome": "Example"
+          "nome": "Women"
+        }
+      }
+    },
+    {
+      "id": "donna-borse-mano",
+      "nome": "Borse a mano",
+      "icona": "",
+      "genitore": "donna",
+      "tr": {
+        "en": {
+          "nome": "Handbags"
+        }
+      }
+    },
+    {
+      "id": "donna-borse-spalla",
+      "nome": "Borse a spalla",
+      "icona": "",
+      "genitore": "donna",
+      "tr": {
+        "en": {
+          "nome": "Shoulder bags"
+        }
+      }
+    },
+    {
+      "id": "donna-tracolle",
+      "nome": "Tracolle e mini bag",
+      "icona": "",
+      "genitore": "donna",
+      "tr": {
+        "en": {
+          "nome": "Crossbody and mini bags"
+        }
+      }
+    },
+    {
+      "id": "donna-shopper",
+      "nome": "Shopper e tote",
+      "icona": "",
+      "genitore": "donna",
+      "tr": {
+        "en": {
+          "nome": "Shoppers and totes"
+        }
+      }
+    },
+    {
+      "id": "donna-pochette",
+      "nome": "Pochette e clutch",
+      "icona": "",
+      "genitore": "donna",
+      "tr": {
+        "en": {
+          "nome": "Pouches and clutches"
+        }
+      }
+    },
+    {
+      "id": "donna-zaini",
+      "nome": "Zaini",
+      "icona": "",
+      "genitore": "donna",
+      "tr": {
+        "en": {
+          "nome": "Backpacks"
+        }
+      }
+    },
+    {
+      "id": "donna-portafogli",
+      "nome": "Portafogli e portacarte",
+      "icona": "",
+      "genitore": "donna",
+      "tr": {
+        "en": {
+          "nome": "Wallets and card holders"
+        }
+      }
+    },
+    {
+      "id": "donna-viaggio",
+      "nome": "Valigeria e viaggio",
+      "icona": "",
+      "genitore": "donna",
+      "tr": {
+        "en": {
+          "nome": "Luggage and travel"
+        }
+      }
+    },
+    {
+      "id": "donna-cinture",
+      "nome": "Cinture",
+      "icona": "",
+      "genitore": "donna",
+      "tr": {
+        "en": {
+          "nome": "Belts"
+        }
+      }
+    },
+    {
+      "id": "donna-giacche",
+      "nome": "Giacche e capispalla",
+      "icona": "",
+      "genitore": "donna",
+      "tr": {
+        "en": {
+          "nome": "Jackets and outerwear"
+        }
+      }
+    },
+    {
+      "id": "donna-scarpe",
+      "nome": "Scarpe e stivali",
+      "icona": "",
+      "genitore": "donna",
+      "tr": {
+        "en": {
+          "nome": "Shoes and boots"
+        }
+      }
+    },
+    {
+      "id": "donna-accessori",
+      "nome": "Guanti e accessori",
+      "icona": "",
+      "genitore": "donna",
+      "tr": {
+        "en": {
+          "nome": "Gloves and accessories"
+        }
+      }
+    },
+    {
+      "id": "uomo",
+      "nome": "Uomo",
+      "icona": "",
+      "tr": {
+        "en": {
+          "nome": "Men"
+        }
+      }
+    },
+    {
+      "id": "uomo-24ore",
+      "nome": "Borse 24 ore e porta PC",
+      "icona": "",
+      "genitore": "uomo",
+      "tr": {
+        "en": {
+          "nome": "Briefcases and laptop bags"
+        }
+      }
+    },
+    {
+      "id": "uomo-messenger",
+      "nome": "Messenger e tracolle",
+      "icona": "",
+      "genitore": "uomo",
+      "tr": {
+        "en": {
+          "nome": "Messenger and crossbody bags"
+        }
+      }
+    },
+    {
+      "id": "uomo-zaini",
+      "nome": "Zaini",
+      "icona": "",
+      "genitore": "uomo",
+      "tr": {
+        "en": {
+          "nome": "Backpacks"
+        }
+      }
+    },
+    {
+      "id": "uomo-viaggio",
+      "nome": "Valigeria e borsoni",
+      "icona": "",
+      "genitore": "uomo",
+      "tr": {
+        "en": {
+          "nome": "Luggage and holdalls"
+        }
+      }
+    },
+    {
+      "id": "uomo-portafogli",
+      "nome": "Portafogli e portacarte",
+      "icona": "",
+      "genitore": "uomo",
+      "tr": {
+        "en": {
+          "nome": "Wallets and card holders"
+        }
+      }
+    },
+    {
+      "id": "uomo-cinture",
+      "nome": "Cinture e bretelle",
+      "icona": "",
+      "genitore": "uomo",
+      "tr": {
+        "en": {
+          "nome": "Belts and braces"
+        }
+      }
+    },
+    {
+      "id": "uomo-giacche",
+      "nome": "Giacche e giubbotti",
+      "icona": "",
+      "genitore": "uomo",
+      "tr": {
+        "en": {
+          "nome": "Jackets and bomber jackets"
+        }
+      }
+    },
+    {
+      "id": "uomo-scarpe",
+      "nome": "Scarpe e stivali",
+      "icona": "",
+      "genitore": "uomo",
+      "tr": {
+        "en": {
+          "nome": "Shoes and boots"
+        }
+      }
+    },
+    {
+      "id": "uomo-accessori",
+      "nome": "Guanti e accessori",
+      "icona": "",
+      "genitore": "uomo",
+      "tr": {
+        "en": {
+          "nome": "Gloves and accessories"
         }
       }
     }
   ],
-  "prodotti": [
-    {
-      "tipo": "digitale",
-      "id": "prodotto-esempio",
-      "nome": "Prodotto di esempio",
-      "categoria": "esempio",
-      "prezzo_centesimi": 1000,
-      "descrizione": "Descrizione breve del prodotto di esempio.",
-      "descrizione_completa": "Descrizione completa del prodotto.\nOgni riga diventa un paragrafo.",
-      "immagine": "",
-      "icona": "🛍️",
-      "visibile": true,
-      "tr": {
-        "en": {
-          "nome": "Example product",
-          "descrizione": "Short description of the example product.",
-          "descrizione_completa": "Full description of the product.\nEach line becomes a paragraph."
-        }
-      }
-    }
-  ]
+  "prodotti": []
 }

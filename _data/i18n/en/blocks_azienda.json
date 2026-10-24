@@ -1,0 +1,8 @@
+[
+  {
+    "id": "chi",
+    "nome": "About us",
+    "enabled": true,
+    "html": "<div class=\"gc\"><section class=\"gc-sec\" id=\"chi\"><div class=\"gc-wrap\"><p class=\"gc-eyebrow\">About us</p><h2 class=\"gc-h2\">Leather, for her and for him</h2><p class=\"gc-lead\">Pelletteria offers leather bags, backpacks, luggage, wallets, belts, jackets and shoes, divided into two departments: Women and Men.</p><p>Pick a department in the shop or write to us from the Contact page.</p><div class=\"gc-act\"><a class=\"gc-btn gc-btn-k\" href=\"__BASEURL__/en/shop/category/women/\">Women</a><a class=\"gc-btn gc-btn-k\" href=\"__BASEURL__/en/shop/category/men/\">Men</a></div></div></section></div>"
+  }
+]

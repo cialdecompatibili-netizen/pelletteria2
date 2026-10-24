@@ -1,0 +1,11 @@
+main:
+  - title: "Home"
+    url: /en/
+  - title: "Women"
+    url: /en/shop/category/women/
+  - title: "Men"
+    url: /en/shop/category/men/
+  - title: "Blog"
+    url: /en/blog/
+  - title: "Contact"
+    url: /en/contact/

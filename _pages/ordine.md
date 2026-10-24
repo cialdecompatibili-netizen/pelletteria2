@@ -21,7 +21,7 @@ NOTE PER CHI MODIFICA QUESTA PAGINA (la logica e' in assets/js/carrello.js, bloc
 - I testi del riepilogo laterale (#nz-sum-fiducia) e l'hint del telefono (#nz-o-tel-h) li riscrive il JS in base a fisico/digitale.
 {% endcomment %}
 <div id="nz-ordine-pag" data-tracker="{{ site.ordini.tracker }}">
-<p id="nz-vuoto">Il carrello è vuoto. <a href="{{ nz_lh | append: 'negozio/' | relative_url }}">Vai al negozio</a></p>
+<p id="nz-vuoto">Il carrello è vuoto. <a href="{% include shop-url.html k="shop" %}">Vai al negozio</a></p>
 <div id="nz-pieno" hidden>
 <ol class="nz-steps">
 <li data-step="1" class="on"><span class="nz-sn">1</span> <span class="nz-sl">Dati</span></li>

@@ -4,7 +4,7 @@
 <div class="nz-icona">{% if include.b.immagine and include.b.immagine != '' %}<img src="{% if include.b.immagine contains '://' %}{{ include.b.immagine }}{% else %}{{ '/' | append: include.b.immagine | relative_url }}{% endif %}" alt="" loading="lazy">{% else %}{{ include.b.icona }}{% endif %}</div>
 <div class="nz-testo">
 <p class="nz-cat">{{ include.cat.tr[page.lang].nome | default: include.cat.nome }} &middot; <span>{% if include.b.tipo == 'digitale' %}digitale{% else %}fisico{% endif %}</span></p>
-<h3><a href="{{ nz_lh | append: 'negozio/' | append: include.b.id | append: '/' | relative_url }}">{{ include.b.tr[page.lang].nome | default: include.b.nome }}</a></h3>
+<h3><a href="{% include shop-url.html k="prod" id=include.b.id %}">{{ include.b.tr[page.lang].nome | default: include.b.nome }}</a></h3>
 <div class="nz-prezzo fw-bold"></div>
 <p class="nz-breve">{{ include.b.tr[page.lang].descrizione | default: include.b.descrizione }}</p>
 </div>

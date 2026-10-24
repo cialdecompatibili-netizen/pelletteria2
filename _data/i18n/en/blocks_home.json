@@ -1,0 +1,38 @@
+[
+  {
+    "id": "hero",
+    "nome": "Hero",
+    "enabled": true,
+    "html": "<div class=\"gc\"><section class=\"ent-hero\"><div class=\"gc-wrap gc-hero-in\"><div><p class=\"gc-eyebrow\">Leather goods &#183; Women and Men</p><h1 class=\"gc-h1\">Leather made to last, <em>for her and for him.</em></h1><p class=\"gc-lead\">Bags, backpacks, luggage, wallets, belts, jackets and shoes in leather: choose Women or Men.</p><div class=\"gc-act\"><a class=\"gc-btn gc-btn-a\" href=\"__BASEURL__/en/shop/category/women/\">Women</a><a class=\"gc-btn gc-btn-a\" href=\"__BASEURL__/en/shop/category/men/\">Men</a><a class=\"gc-btn gc-btn-o\" href=\"#categorie\">Browse the categories</a></div></div><div class=\"ent-cycle\"><div><b>Two departments</b><span>Women and Men, with the categories under each</span></div><div><b>21 categories</b><span>Bags, luggage, wallets, belts, jackets and shoes</span></div><div><b>Clear prices</b><span>The price is shown next to every item</span></div></div></div></section></div>"
+  },
+  {
+    "id": "perche",
+    "nome": "Why Pelletteria",
+    "enabled": true,
+    "html": "<div class=\"gc\"><section class=\"gc-sec gc-soft\" id=\"perche\"><div class=\"gc-wrap\"><h2 class=\"gc-h2\">Why Pelletteria</h2><div class=\"gc-plat\"><div class=\"gc-pl\"><b>Two departments, everything in order</b><p>Women and Men, with the categories under each.</p></div><div class=\"gc-pl\"><b>Clear prices</b><p>The price is shown next to every item.</p></div><div class=\"gc-pl\"><b>In Italian and in English</b><p>The site is available in two languages: pick yours from the selector.</p></div></div></div></section></div>"
+  },
+  {
+    "id": "donna",
+    "nome": "Women",
+    "enabled": true,
+    "html": "<div class=\"gc\"><section class=\"gc-sec\" id=\"categorie\"><div class=\"gc-wrap\"><p class=\"gc-eyebrow\">Categories</p><h2 class=\"gc-h2\"><a href=\"__BASEURL__/en/shop/category/women/\">Women</a></h2><p class=\"gc-lead\">Leather bags, wallets, belts, jackets, shoes and accessories for women.</p><div class=\"gc-plat\"><div class=\"gc-pl\"><b><a href=\"__BASEURL__/en/shop/category/women-handbags/\">Handbags</a></b><p>Structured leather handbags, bowling bags and bucket bags.</p></div><div class=\"gc-pl\"><b><a href=\"__BASEURL__/en/shop/category/women-shoulder-bags/\">Shoulder bags</a></b><p>Leather shoulder bags and hobo bags, comfortable every day.</p></div><div class=\"gc-pl\"><b><a href=\"__BASEURL__/en/shop/category/women-crossbody-bags/\">Crossbody and mini bags</a></b><p>Leather crossbody bags, mini bags and belt bags.</p></div><div class=\"gc-pl\"><b><a href=\"__BASEURL__/en/shop/category/women-totes/\">Shoppers and totes</a></b><p>Roomy shoppers and tote bags for work and leisure.</p></div><div class=\"gc-pl\"><b><a href=\"__BASEURL__/en/shop/category/women-clutches/\">Pouches and clutches</a></b><p>Leather pouches, clutches and evening bags.</p></div><div class=\"gc-pl\"><b><a href=\"__BASEURL__/en/shop/category/women-backpacks/\">Backpacks</a></b><p>Leather backpacks for the city and for work.</p></div><div class=\"gc-pl\"><b><a href=\"__BASEURL__/en/shop/category/women-wallets/\">Wallets and card holders</a></b><p>Wallets, card holders, coin purses and key rings.</p></div><div class=\"gc-pl\"><b><a href=\"__BASEURL__/en/shop/category/women-travel/\">Luggage and travel</a></b><p>Trolleys, travel bags, beauty cases and weekenders.</p></div><div class=\"gc-pl\"><b><a href=\"__BASEURL__/en/shop/category/women-belts/\">Belts</a></b><p>Classic and slim belts in leather.</p></div><div class=\"gc-pl\"><b><a href=\"__BASEURL__/en/shop/category/women-jackets/\">Jackets and outerwear</a></b><p>Leather jackets, gilets and coats.</p></div><div class=\"gc-pl\"><b><a href=\"__BASEURL__/en/shop/category/women-shoes/\">Shoes and boots</a></b><p>Leather shoes, boots and ballet flats.</p></div><div class=\"gc-pl\"><b><a href=\"__BASEURL__/en/shop/category/women-accessories/\">Gloves and accessories</a></b><p>Leather gloves, scarves, hats and straps.</p></div></div></div></section></div>"
+  },
+  {
+    "id": "uomo",
+    "nome": "Men",
+    "enabled": true,
+    "html": "<div class=\"gc\"><section class=\"gc-sec gc-soft\" id=\"reparto-uomo\"><div class=\"gc-wrap\"><h2 class=\"gc-h2\"><a href=\"__BASEURL__/en/shop/category/men/\">Men</a></h2><p class=\"gc-lead\">Leather work bags, backpacks, wallets, belts, jackets and shoes for men.</p><div class=\"gc-plat\"><div class=\"gc-pl\"><b><a href=\"__BASEURL__/en/shop/category/men-briefcases/\">Briefcases and laptop bags</a></b><p>Leather briefcases, attach&#233; cases and laptop bags for work.</p></div><div class=\"gc-pl\"><b><a href=\"__BASEURL__/en/shop/category/men-messenger-bags/\">Messenger and crossbody bags</a></b><p>Messenger bags, crossbody bags and shoulder bags for men.</p></div><div class=\"gc-pl\"><b><a href=\"__BASEURL__/en/shop/category/men-backpacks/\">Backpacks</a></b><p>Leather backpacks for the city, for work and for travel.</p></div><div class=\"gc-pl\"><b><a href=\"__BASEURL__/en/shop/category/men-travel/\">Luggage and holdalls</a></b><p>Trolleys, travel holdalls, weekenders and garment bags.</p></div><div class=\"gc-pl\"><b><a href=\"__BASEURL__/en/shop/category/men-wallets/\">Wallets and card holders</a></b><p>Wallets, card holders, passport covers and key rings.</p></div><div class=\"gc-pl\"><b><a href=\"__BASEURL__/en/shop/category/men-belts/\">Belts and braces</a></b><p>Leather belts with classic buckles.</p></div><div class=\"gc-pl\"><b><a href=\"__BASEURL__/en/shop/category/men-jackets/\">Jackets and bomber jackets</a></b><p>Leather jackets, bomber jackets and gilets.</p></div><div class=\"gc-pl\"><b><a href=\"__BASEURL__/en/shop/category/men-shoes/\">Shoes and boots</a></b><p>Leather lace-ups, loafers and boots.</p></div><div class=\"gc-pl\"><b><a href=\"__BASEURL__/en/shop/category/men-accessories/\">Gloves and accessories</a></b><p>Gloves, hats, scarves and watch straps.</p></div></div></div></section></div>"
+  },
+  {
+    "id": "reparto",
+    "nome": "Choose your department",
+    "enabled": true,
+    "html": "<div class=\"gc\"><section class=\"gc-sec gc-dark\" id=\"reparto\"><div class=\"gc-wrap\"><h2 class=\"gc-h2\">Choose your department</h2><p class=\"gc-lead\">Women or Men: find the category you need.</p><a class=\"gc-btn\" href=\"__BASEURL__/en/shop/\">Go to the shop</a></div></section></div>"
+  },
+  {
+    "id": "contatti",
+    "nome": "Final call to action",
+    "enabled": false,
+    "html": "<div class=\"gc\"><section class=\"gc-sec gc-dark\" id=\"contatti\"><div class=\"gc-wrap\"><p class=\"gc-eyebrow\">Contact</p><h2 class=\"gc-h2\">Looking for something special?</h2><p class=\"gc-lead\">Write to us: we will tell you if we can make it.</p><a class=\"gc-btn\" href=\"__BASEURL__/en/contact/\">Contact us</a></div></section></div>"
+  }
+]
