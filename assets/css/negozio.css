@@ -398,3 +398,11 @@ Testo e azioni hanno il loro padding. Per ingrandire/ridurre: cambia la prima co
   #negozio .nz-riga .nz-icona { min-height: 0; aspect-ratio: 16 / 10; }
   #negozio .nz-riga .nz-testo { padding: .8rem 1rem .2rem; }
 }
+
+/* Sottocategorie: griglia a 2 colonne simmetriche (stessa larghezza); se il numero e' dispari l'ultima occupa tutta la riga */
+#negozio .nz-pills.nz-sub { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+#negozio .nz-pills.nz-sub .nz-cpill { display: block; text-align: center; padding: .55rem .8rem; }
+#negozio .nz-pills.nz-sub .nz-cpill:last-child:nth-child(odd) { grid-column: 1 / -1; }
+/* Riga reparti (Tutti / Donna / Uomo): colonne di uguale larghezza */
+#negozio .nz-pills:not(.nz-sub) { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); }
+#negozio .nz-pills:not(.nz-sub) .nz-cpill { display: block; text-align: center; padding: .55rem .8rem; }
