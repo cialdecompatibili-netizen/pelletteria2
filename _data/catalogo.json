@@ -253,5 +253,25 @@
       }
     }
   ],
-  "prodotti": []
+  "prodotti": [
+    {
+      "tipo": "fisico",
+      "id": "borsa-a-mano-pelle-cognac",
+      "nome": "Borsa a mano in pelle cognac",
+      "categoria": "donna-borse-mano",
+      "prezzo_centesimi": 24900,
+      "descrizione": "Borsa a mano strutturata in pelle color cognac, con doppio manico rigido e chiusura con zip.",
+      "descrizione_completa": "Borsa a mano strutturata in pelle color cognac, con doppio manico rigido e chiusura con zip.\nInterno rifinito con tasca portaoggetti.\nPelle pieno fiore: ogni pezzo puo avere lievi differenze di grana e colore.",
+      "immagine": "",
+      "icona": "",
+      "visibile": true,
+      "tr": {
+        "en": {
+          "nome": "Cognac leather handbag",
+          "descrizione": "Structured cognac leather handbag with double rigid handles and zip closure.",
+          "descrizione_completa": "Structured cognac leather handbag with double rigid handles and zip closure.\nLined interior with an inner pocket.\nFull-grain leather: each piece may show slight differences in grain and colour."
+        }
+      }
+    }
+  ]
 }
