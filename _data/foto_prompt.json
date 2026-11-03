@@ -1,4 +1,7 @@
 {
  "template": "Fotografia di prodotto professionale e-commerce di lusso: {nome}, {aspetto}. Sfondo neutro chiaro sfumato, luce morbida da studio, alta definizione, nessun testo, nessuna scritta, nessun logo, nessuna persona",
- "default": "pelle autentica con grana naturale, cuciture precise, finiture eleganti e colori realistici"
+ "default": "pelle autentica con grana naturale, cuciture precise, finiture eleganti e colori realistici",
+ "aspetti": {
+  "portafoglio-bifold-uomo-in-pelle-nera": "portafoglio bifold da uomo in pelle nera pieno fiore, leggermente aperto per mostrare gli scomparti carte, cuciture precise, finitura elegante"
+ }
 }
