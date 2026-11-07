@@ -9,6 +9,8 @@ ref: come-riconoscere-borsa-vera-pelle
 share: false
 tr: tradotto
 tr_hash: 8mw38
+lang: en
+locale: en
 ---
 
 A good leather bag lasts for years and gets better with use. Before you choose, here are five simple checks you can make even in the shop.

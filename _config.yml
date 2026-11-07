@@ -20,7 +20,7 @@
 # languages = elenco lingue attive: sono i nomi delle cartelle (it alla radice, en in /en/).
 locale: "it"
 default_lang: it
-languages: [it,en]
+languages: [it, en]
 
 # --- IDENTITA' DEL SITO (da cambiare per ogni clone) -----------------------------------
 # NOME SITO (menu in alto, footer, SEO): AUTOMATICO, calcolato da _includes/site-name.html.
