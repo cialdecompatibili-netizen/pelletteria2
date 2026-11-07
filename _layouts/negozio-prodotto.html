@@ -24,13 +24,12 @@ PUNTI CRITICI
 <div class="nz-pp-grid">
 <div class="nz-pp-media">
 {%- if nz_p.immagine and nz_p.immagine != '' -%}
-<div class="nz-pp-foto"><img src="{% if nz_p.immagine contains '://' %}{{ nz_p.immagine }}{% else %}{{ '/' | append: nz_p.immagine | relative_url }}{% endif %}" alt="{{ nz_p.tr[page.lang].nome | default: nz_p.nome | escape }}"></div>
+<div class="nz-pp-foto nz-zoom"><img src="{% if nz_p.immagine contains '://' %}{{ nz_p.immagine }}{% else %}{{ '/' | append: nz_p.immagine | relative_url }}{% endif %}" alt="{{ nz_p.tr[page.lang].nome | default: nz_p.nome | escape }}"></div>
 {%- else -%}
 <div class="nz-pp-foto nz-pp-ph" aria-hidden="true">{{ nz_p.icona }}</div>
 {%- endif -%}
 </div>
 <div class="nz-box nz-scheda nz-pp-info" data-id="{{ nz_p.id }}" data-nome="{{ nz_p.tr[page.lang].nome | default: nz_p.nome | escape }}" data-prezzo="{{ nz_p.prezzo_centesimi | default: 0 }}" data-tipo="{{ nz_p.tipo | default: 'fisico' }}" data-periodo="">
-<p class="nz-pp-badge">{% if nz_dig %}Prodotto digitale{% else %}Prodotto fisico{% endif %}</p>
 <p class="nz-prezzo nz-pp-prezzo fw-bold"></p>
 <p class="nz-pp-breve">{{ nz_p.tr[page.lang].descrizione | default: nz_p.descrizione | escape }}</p>
 <div class="nz-pp-acq">
@@ -50,3 +49,10 @@ PUNTI CRITICI
 <p class="nz-pp-torna"><a href="{% include shop-url.html k="shop" %}">&larr; Torna al negozio</a> &middot; <a href="{{ nz_lh | append: 'carrello/' | relative_url }}">Vai al carrello</a></p>
 </div>
 {%- endif -%}
+<script>
+(function(){var f=document.querySelector('.nz-zoom img');if(!f)return;f.style.cursor='zoom-in';
+f.addEventListener('click',function(){var o=document.createElement('div');o.className='nz-lb';
+o.innerHTML='<img src="'+f.src+'" alt=""><span aria-label="Chiudi">&times;</span>';
+function c(){o.remove();document.removeEventListener('keydown',k)}function k(e){if(e.key==='Escape')c()}
+o.addEventListener('click',c);document.addEventListener('keydown',k);document.body.appendChild(o);});})();
+</script>

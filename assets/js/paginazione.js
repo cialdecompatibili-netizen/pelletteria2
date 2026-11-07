@@ -34,16 +34,13 @@
     });
     s.nav.innerHTML = '';
     if (np <= 1) return;
-    s.nav.appendChild(btn('\u2039', s.page - 1, { dis: s.page === 1, aria: EN ? 'Previous page' : 'Pagina precedente' }));
-    var last = 0;
-    for (var p = 1; p <= np; p++) {
-      if (p === 1 || p === np || Math.abs(p - s.page) <= 1) {
-        if (last && p - last > 1) { var g = document.createElement('span'); g.className = 'pg-gap'; g.textContent = '\u2026'; s.nav.appendChild(g); }
-        s.nav.appendChild(btn(p, p, { cur: p === s.page }));
-        last = p;
-      }
-    }
-    s.nav.appendChild(btn('\u203a', s.page + 1, { dis: s.page === np, aria: EN ? 'Next page' : 'Pagina successiva' }));
+    var pv = s.page === 1, nx = s.page === np;
+    s.nav.appendChild(btn('<', s.page - 1, { dis: pv, aria: EN ? 'Previous page' : 'Pagina precedente' }));
+    s.nav.appendChild(btn('<<', 1, { dis: pv, aria: EN ? 'First page' : 'Prima pagina' }));
+    var st = Math.max(1, Math.min(s.page - 2, np - 4)), en = Math.min(np, st + 4);
+    for (var p = st; p <= en; p++) s.nav.appendChild(btn(p, p, { cur: p === s.page }));
+    s.nav.appendChild(btn('>', s.page + 1, { dis: nx, aria: EN ? 'Next page' : 'Pagina successiva' }));
+    s.nav.appendChild(btn('>>', np, { dis: nx, aria: EN ? 'Last page' : 'Ultima pagina' }));
     if (scroll) box.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 

@@ -50,7 +50,7 @@ Le classi nz-* e i testi italiani dentro elementi nz-* sono tradotti da shop-i18
 {%- else -%}
 <p class="nz-cnt">{{ nz_lista.size }} {% if nz_lista.size == 1 %}prodotto{% else %}prodotti{% endif %}</p>
 {%- endif -%}
-<div class="nz-lista" data-pg data-pg-item=".nz-box" data-per="{{ site.per_page | default: 20 }}">
+<div class="nz-lista" data-pg data-pg-item=".nz-box" data-per="50">
 {%- for b in nz_lista -%}
 {%- assign nz_cb = site.data.catalogo.categorie | where: 'id', b.categoria | first -%}
 {% include negozio-riga.html b=b cat=nz_cb %}

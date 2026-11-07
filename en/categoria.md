@@ -74,7 +74,7 @@ const SITE_POSTS = [
   if(!posts.length){
     html += '<div class="cat-empty">No articles in this category.</div>';
   } else {
-    html += '<div class="art-list" data-pg data-pg-item=".art-row" data-per="{{ site.per_page | default: 20 }}">';
+    html += '<div class="art-list" data-pg data-pg-item=".art-row" data-per="50">';
     posts.forEach(p => {
       const alt = p.title.replace(/"/g,'&quot;');
       const img = p.image

@@ -9,7 +9,7 @@ noindex: false
 ref: shop-negozio
 lang: en
 locale: en
-tr: tradotto
+tr: da_aggiornare
 tr_hash: 1gurp1g
 permalink: /en/shop/
 ---
@@ -22,7 +22,7 @@ permalink: /en/shop/
 <a class="nz-cpill" href="{% include shop-url.html k="cat" id=c.id %}">{{ c.icona }} {{ c.tr[page.lang].nome | default: c.nome }}</a>
 {% endunless %}{% endfor %}
 </div>
-<div class="nz-lista" data-pg data-pg-item=".nz-box" data-per="{{ site.per_page | default: 20 }}">
+<div class="nz-lista" data-pg data-pg-item=".nz-box" data-per="50">
 {% for b in site.data.catalogo.prodotti %}
 {% if b.visibile == false %}{% continue %}{% endif %}
 {% assign cat = site.data.catalogo.categorie | where: 'id', b.categoria | first %}

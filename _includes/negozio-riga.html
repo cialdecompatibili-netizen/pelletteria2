@@ -3,7 +3,7 @@
 <div class="nz-riga nz-box" data-id="{{ include.b.id }}" data-cat="{{ include.b.categoria }}" data-nome="{{ include.b.tr[page.lang].nome | default: include.b.nome | escape }}" data-prezzo="{{ include.b.prezzo_centesimi | default: 0 }}" data-tipo="{{ include.b.tipo | default: 'fisico' }}">
 <div class="nz-icona">{% if include.b.immagine and include.b.immagine != '' %}<img src="{% if include.b.immagine contains '://' %}{{ include.b.immagine }}{% else %}{{ '/' | append: include.b.immagine | relative_url }}{% endif %}" alt="" loading="lazy">{% else %}{{ include.b.icona }}{% endif %}</div>
 <div class="nz-testo">
-<p class="nz-cat">{{ include.cat.tr[page.lang].nome | default: include.cat.nome }} &middot; <span>{% if include.b.tipo == 'digitale' %}digitale{% else %}fisico{% endif %}</span></p>
+<p class="nz-cat">{{ include.cat.tr[page.lang].nome | default: include.cat.nome }}</p>
 <h3><a href="{% include shop-url.html k="prod" id=include.b.id %}">{{ include.b.tr[page.lang].nome | default: include.b.nome }}</a></h3>
 <div class="nz-prezzo fw-bold"></div>
 <p class="nz-breve">{{ include.b.tr[page.lang].descrizione | default: include.b.descrizione }}</p>
