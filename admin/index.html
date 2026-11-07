@@ -2057,96 +2057,142 @@ async function eseguiAggiornamento(){
 
 // ============ SHOP — CATEGORIE ============
 // SHOP CATEGORIE
-let _shopcatSha=null;
+// ADMIN SHOP SU catalogo.json: stessa fonte del sito. Categorie e prodotti si leggono/scrivono in _data/catalogo.json
+// + le pagine _negozio/<id>.md (e en/negozio/... se esiste la cartella en/). NON usa piu' _products/ ne' shop-categorie.json (vecchi, il sito non li legge).
+// Ogni salvataggio rilegge catalogo.json subito prima (sha fresco) e scrive le PAGINE prima del catalogo. Campi extra dei prodotti (tr, varianti, fonte, categoria2...) restano intatti.
+const CAT_FILE='_data/catalogo.json';
+let _cat=null;
 let _shopcats=[];
+let _enOk=null;
+function _gh(path){return fetch(`https://api.github.com/repos/${REPO}/contents/${path}`,{headers:{'Authorization':`token ${tok()}`},cache:'no-store'});}
+async function _catGet(){
+  const r=await _gh(CAT_FILE);
+  if(!r.ok)throw new Error(r.status===404?'catalogo.json non trovato in '+REPO:'GitHub '+r.status+' ('+REPO+')');
+  const j=await r.json();
+  return {d:JSON.parse(dec(j.content)),sha:j.sha};
+}
+async function _catPut(d,sha,msg){
+  const r=await ghPut(CAT_FILE,msg,JSON.stringify(d,null,2)+'\n',sha);
+  if(!r.ok){let m='';try{m=(await r.json()).message;}catch(e){}throw new Error('Salvataggio catalogo: '+(m||r.status));}
+}
+async function _putFile(path,msg,content){
+  const r0=await _gh(path);let sha;
+  if(r0.ok){sha=(await r0.json()).sha;}
+  const r=await ghPut(path,msg,content,sha);
+  if(!r.ok){let m='';try{m=(await r.json()).message;}catch(e){}throw new Error(path+': '+(m||r.status));}
+}
+async function _delFile(path,msg){
+  const r0=await _gh(path);if(!r0.ok)return;
+  const sha=(await r0.json()).sha;
+  await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`,{method:'DELETE',headers:{'Authorization':`token ${tok()}`,'Content-Type':'application/json'},body:JSON.stringify({message:msg,sha})});
+}
+async function _haEn(){
+  if(_enOk===null){try{_enOk=(await _gh('en/negozio')).ok;}catch(e){_enOk=false;}}
+  return _enOk;
+}
+function _slug(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-').replace(/-+/g,'-');}
+function _yq(s){return String(s==null?'':s).replace(/\\/g,'\\\\').replace(/"/g,'\\"').replace(/\s*\n\s*/g,' ');}
+function _esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');}
+function _imgRel(u){u=(u||'').trim();const i=u.indexOf('/assets/');if(/^https?:/.test(u)&&i>=0)return u.slice(i+1);return u.replace(/^\/+/,'');}
+function _pagCat(c,en){
+  const t=en?((c.tr&&c.tr.en&&c.tr.en.nome)||c.nome):c.nome;
+  return '---\nlayout: negozio-categoria\ntitle: "'+_yq(t)+'"\ncid: '+c.id+'\nref: shop-cat-'+c.id+'\npermalink: '+(en?'/en/shop/category/':'/negozio/categoria/')+c.id+'/\ndescription: "'+_yq(t)+'"\n'+(en?'lang: en\nlocale: en\ntr: copia\n':'')+'---\n';
+}
+function _pagProd(p,en){
+  const e=(p.tr&&p.tr.en)||{};
+  const t=en?(e.nome||p.nome):p.nome,ds=en?(e.descrizione||p.descrizione):p.descrizione;
+  return '---\nlayout: negozio-prodotto\ntitle: "'+_yq(t)+'"\npid: '+p.id+'\npermalink: '+(en?'/en/shop/':'/negozio/')+p.id+'/\ndescription: "'+_yq((ds||t).slice(0,160))+'"\nref: shop-prod-'+p.id+'\n'+(en?'lang: en\nlocale: en\ntr: copia\n':'')+'---\n';
+}
+function _ordinaCat(cats){
+  const top=cats.filter(c=>!c.genitore),out=[];
+  top.forEach(t=>{out.push([t,0]);cats.filter(c=>c.genitore===t.id).forEach(c=>out.push([c,1]));});
+  cats.filter(c=>c.genitore&&!top.some(t=>t.id===c.genitore)).forEach(c=>out.push([c,1]));
+  return out;
+}
+function _riempiSelCat(){
+  const sel=document.getElementById('prod-categoria');
+  if(sel){const cur=sel.value;sel.innerHTML='<option value="">— Seleziona —</option>'+_ordinaCat(_shopcats).map(x=>`<option value="${_esc(x[0].id)}">${x[1]?'\u00a0\u00a0↳ ':''}${_esc(x[0].nome)}</option>`).join('');sel.value=cur;}
+  let g=document.getElementById('shopcat-genitore');
+  if(!g){const s=document.getElementById('shopcat-slug');const gr=s&&s.closest('.grid2');if(gr){gr.insertAdjacentHTML('afterend','<div class="field"><label>Reparto / categoria madre</label><select id="shopcat-genitore"></select></div>');g=document.getElementById('shopcat-genitore');}}
+  if(g){const cg=g.value;g.innerHTML='<option value="">— Nessuna (categoria principale) —</option>'+_shopcats.filter(c=>!c.genitore).map(c=>`<option value="${_esc(c.id)}">${_esc(c.nome)}</option>`).join('');g.value=cg;}
+}
 
 async function caricaCatShop(){
   const el=document.getElementById('lista-cat-shop');
-  const sel=document.getElementById('prod-categoria');
-  if(!tok()){
-    el.innerHTML='<em style="color:#bbb;font-size:13px">Token mancante — vai in Token per configurarlo.</em>';
-    return;
-  }
-  let res;
-  try{ res=await ghGet('_data/shop-categorie.json'); }
-  catch(e){
-    el.innerHTML='<em style="color:#bbb;font-size:13px">Errore di rete.</em>';return;
-  }
-  if(!res.ok){
-    _shopcats=[];_shopcatSha=null;
-    el.innerHTML='<em style="color:#bbb;font-size:13px">Nessuna categoria. Aggiungine una.</em>';
-    sel.innerHTML='<option value="">— Seleziona —</option>';return;
-  }
-  const d=await res.json();_shopcatSha=d.sha;
-  _shopcats=JSON.parse(dec(d.content));
-  // lista
-  el.innerHTML=_shopcats.length?_shopcats.map(c=>`
-    <div class="cat-row" style="display:flex;justify-content:space-between;align-items:center">
-      <span style="font-size:13px;font-weight:600">${c.nome} <span style="color:#bbb;font-weight:400">(${c.slug})</span></span>
-      <button class="btn btn-danger btn-sm" onclick="eliminaCatShop('${c.slug}')">🗑</button>
-    </div>`).join(''):'<em style="color:#bbb;font-size:13px">Nessuna categoria.</em>';
-  // select prodotto
-  sel.innerHTML='<option value="">— Seleziona —</option>'+_shopcats.map(c=>`<option value="${c.slug}">${c.nome}</option>`).join('');
-}
-
-async function salvaCatShop(){
-  const body=JSON.stringify(_shopcats,null,2);
-  const opts={message:'Aggiorna categorie shop'};
-  if(_shopcatSha) opts.sha=_shopcatSha;
-  const res=await ghPut('_data/shop-categorie.json','Aggiorna categorie shop',body,_shopcatSha||undefined);
-  const j=await res.json();
-  if(res.ok){_shopcatSha=j.content.sha;return true;}
-  return false;
+  if(!tok()){el.innerHTML='<em style="color:#bbb;font-size:13px">Token mancante — vai in Token per configurarlo.</em>';return;}
+  try{const x=await _catGet();_cat=x.d;_shopcats=x.d.categorie||[];}
+  catch(e){el.innerHTML='<em style="color:#bbb;font-size:13px">'+_esc(e.message||e)+'</em>';return;}
+  _riempiSelCat();
+  const n={};(_cat.prodotti||[]).forEach(p=>{[p.categoria,p.categoria2].forEach(k=>{if(k)n[k]=(n[k]||0)+1;});});
+  el.innerHTML=_shopcats.length?_ordinaCat(_shopcats).map(x=>{const c=x[0];return `
+    <div class="cat-row" style="display:flex;justify-content:space-between;align-items:center;${x[1]?'padding-left:24px':''}">
+      <span style="font-size:13px;font-weight:${x[1]?400:600}">${x[1]?'↳ ':''}${_esc(c.nome)} <span style="color:#bbb;font-weight:400">(${_esc(c.id)}${n[c.id]?' · '+n[c.id]+' prodotti':''})</span></span>
+      <button class="btn btn-danger btn-sm" onclick="eliminaCatShop('${_esc(c.id)}')">🗑</button>
+    </div>`;}).join(''):'<em style="color:#bbb;font-size:13px">Nessuna categoria.</em>';
 }
 
 async function aggiungiCatShop(){
   const nome=document.getElementById('shopcat-nome').value.trim();
-  const slug=document.getElementById('shopcat-slug').value.trim();
-  if(!nome||!slug)return showMsg('msg-shopcat','⚠️ Nome e slug obbligatori.','err');
+  const slugIn=document.getElementById('shopcat-slug').value.trim();
+  const ge=document.getElementById('shopcat-genitore');const gen=ge?ge.value:'';
+  if(!nome)return showMsg('msg-shopcat','⚠️ Nome obbligatorio.','err');
   if(!tok())return showMsg('msg-shopcat','⚠️ Token mancante.','err');
-  _shopcats.push({nome,slug});
-  const ok=await salvaCatShop();
-  if(ok){
+  showMsg('msg-shopcat','⏳ Salvataggio...','');
+  try{
+    const x=await _catGet();const d=x.d;d.categorie=d.categorie||[];
+    const base=_slug(slugIn||nome);if(!base)throw new Error('Slug non valido');
+    const id=(gen&&base.indexOf(gen+'-')!==0?gen+'-':'')+base;
+    if(id==='categoria'||d.categorie.some(c=>c.id===id)||(d.prodotti||[]).some(p=>p.id===id))throw new Error('Esiste gia "'+id+'"');
+    const c={id:id,nome:nome,icona:''};if(gen)c.genitore=gen;c.tr={en:{nome:nome}};
+    await _putFile('_negozio/categoria-'+id+'.md','Categoria: '+nome,_pagCat(c,false));
+    if(await _haEn())await _putFile('en/negozio/categoria/'+id+'.md','Category: '+nome,_pagCat(c,true));
+    d.categorie.push(c);
+    await _catPut(d,x.sha,'Categoria shop: '+nome);
     showMsg('msg-shopcat','✅ Categoria aggiunta!','ok');
-    document.getElementById('shopcat-nome').value='';
-    document.getElementById('shopcat-slug').value='';
-    caricaCatShop();
-  } else showMsg('msg-shopcat','❌ Errore salvataggio.','err');
+    document.getElementById('shopcat-nome').value='';document.getElementById('shopcat-slug').value='';
+    startDeployPolling();caricaCatShop();
+  }catch(e){showMsg('msg-shopcat','❌ '+(e.message||e),'err');}
 }
 
-async function eliminaCatShop(slug){
+async function eliminaCatShop(id){
   if(!confirm('Eliminare la categoria?'))return;
-  _shopcats=_shopcats.filter(c=>c.slug!==slug);
-  const ok=await salvaCatShop();
-  if(ok){showMsg('msg-shopcat','✅ Eliminata!','ok');caricaCatShop();startDeployPolling();}
-  else showMsg('msg-shopcat','❌ Errore.','err');
+  try{
+    const x=await _catGet();const d=x.d;
+    if((d.categorie||[]).some(c=>c.genitore===id))throw new Error('Ha sottocategorie: eliminale prima.');
+    if((d.prodotti||[]).some(p=>p.categoria===id||p.categoria2===id))throw new Error('Ha prodotti: spostali o eliminali prima.');
+    d.categorie=(d.categorie||[]).filter(c=>c.id!==id);
+    await _catPut(d,x.sha,'Elimina categoria shop: '+id);
+    await _delFile('_negozio/categoria-'+id+'.md','Elimina categoria '+id);
+    await _delFile('en/negozio/categoria/'+id+'.md','Elimina categoria '+id);
+    showMsg('msg-shopcat','✅ Eliminata!','ok');caricaCatShop();startDeployPolling();
+  }catch(e){showMsg('msg-shopcat','❌ '+(e.message||e),'err');}
 }
 
 // ============ SHOP — PRODOTTI ============
-// SHOP PRODOTTI
+// SHOP PRODOTTI (su catalogo.json; _prodPath = id del prodotto in modifica, null = nuovo)
 // NON chiamare SeoPanel a livello globale: seo-panel.js si carica DOPO questo script (errore = si blocca tutto il resto, categorie incluse)
 let _prodPath=null;
+let _prodLista=[];
 
 function nuovoProdotto(){
-  ['prod-titolo','prod-prezzo','prod-stock','prod-sku','prod-immagine','prod-corpo'].forEach(id=>document.getElementById(id).value='');
+  ['prod-titolo','prod-prezzo','prod-stock','prod-sku','prod-immagine','prod-corpo','prod-description'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
   document.getElementById('prod-categoria').value='';
   document.getElementById('prod-tipo').value='fisico';
   _prodPath=null;SeoPanel.set('seo-prod',{});
   showMsg('msg-prod','','');
 }
 
-// Apre la vista editor per un NUOVO prodotto (bottone "✚ Nuovo prodotto" nella lista) — stessa
-// logica di apriNuovoArticolo(): resetta i campi, nasconde la lista, mostra il form vuoto.
+// Apre la vista editor per un NUOVO prodotto (bottone "✚ Nuovo prodotto" nella lista).
 function apriNuovoProdotto(){
   nuovoProdotto();
   document.getElementById('prod-editor-title').textContent='Nuovo prodotto';
   document.getElementById('prod-lista-view').style.display='none';
   document.getElementById('prod-editor-view').style.display='block';
+  if(!_shopcats.length&&tok())_catGet().then(x=>{_cat=x.d;_shopcats=x.d.categorie||[];_riempiSelCat();}).catch(()=>{});
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// Torna alla lista prodotti (bottone "← Torna ai prodotti" nell'editor) — ricarica la lista
-// cosi' eventuali modifiche appena salvate sono subito visibili.
+// Torna alla lista prodotti — ricarica la lista cosi' le modifiche appena salvate sono visibili.
 function tornaListaProdotti(){
   document.getElementById('prod-editor-view').style.display='none';
   document.getElementById('prod-lista-view').style.display='block';
@@ -2154,8 +2200,6 @@ function tornaListaProdotti(){
 }
 
 // ── Paginazione lista prodotti ──────────────────────────────────────────
-// Limite configurabile dalla tab Impostazioni (default 50), salvato in localStorage.
-// getLimiteProdotti()/setLimiteProdotti() sono usate anche dal campo in Impostazioni.
 // GUIDA-SVILUPPO: UN solo valore per tutte le liste = per_page di _config.yml (copia in localStorage 'cms_per_page' per l'admin).
 // Lo leggono anche js/wp-elenchi.js (articoli, pagine) e il sito (assets/js/paginazione.js). Non reintrodurre limiti separati per elenco.
 function getPerPage(){return parseInt(localStorage.getItem('cms_per_page'))||20;}
@@ -2167,41 +2211,30 @@ let _prodPaginaCorrente=1;
 async function caricaProdotti(){
   const el=document.getElementById('lista-prodotti');
   if(!tok()){el.innerHTML='<em style="color:#bbb;font-size:13px">Token mancante.</em>';return;}
-  const cached=JSON.parse(localStorage.getItem('cms_cache_prodotti')||'null');
-  if(cached)_renderListaProdotti(cached);
-  let res;
-  try{ res=await ghGet('_products'); }
-  catch(e){el.innerHTML='<em style="color:#bbb;font-size:13px">Errore di rete.</em>';return;}
-  if(!res.ok){el.innerHTML='<em style="color:#bbb;font-size:13px">Cartella _products non trovata.</em>';return;}
-  const files=await res.json();
-  localStorage.setItem('cms_cache_prodotti',JSON.stringify(files));
-  _renderListaProdotti(files);
+  try{const x=await _catGet();_cat=x.d;_shopcats=x.d.categorie||[];_prodLista=x.d.prodotti||[];}
+  catch(e){el.innerHTML='<em style="color:#bbb;font-size:13px">'+_esc(e.message||e)+'</em>';return;}
+  _riempiSelCat();
+  _renderListaProdotti();
 }
-// Renderizza la lista prodotti CON paginazione. Il limite per pagina viene da getLimiteProdotti()
-// (modificabile in Impostazioni). _prodPaginaCorrente tiene lo stato tra un render e l'altro —
-// vaiAPaginaProdotti(n) lo aggiorna e richiama questa funzione.
-function _renderListaProdotti(files){
+
+function _renderListaProdotti(){
   const el=document.getElementById('lista-prodotti');
   const pagEl=document.getElementById('prod-paginazione');
-  const prods=files.filter(f=>f.name.endsWith('.md'));
+  const prods=_prodLista;
   if(!prods.length){el.innerHTML='<em style="color:#bbb;font-size:13px">Nessun prodotto ancora.</em>';pagEl.innerHTML='';return;}
-
   const limite=getLimiteProdotti();
   const totalePagine=Math.max(1, Math.ceil(prods.length/limite));
   if(_prodPaginaCorrente>totalePagine)_prodPaginaCorrente=totalePagine;
   const start=(_prodPaginaCorrente-1)*limite;
-  const paginaProds=prods.slice(start, start+limite);
-
-  el.innerHTML=paginaProds.map(f=>`
+  const nomeCat=id=>{const c=_shopcats.find(x=>x.id===id);return c?c.nome:id;};
+  el.innerHTML=prods.slice(start,start+limite).map(p=>`
     <div class="list-row">
-      <span style="font-size:13px">🛒 ${f.name.replace('.md','')}</span>
+      <span style="font-size:13px">🛒 ${_esc(p.nome)} <span style="color:#bbb">· ${_esc(nomeCat(p.categoria))} · ${(p.prezzo_centesimi/100).toFixed(2).replace('.',',')} €${p.visibile===false?' · nascosto':''}</span></span>
       <div style="display:flex;gap:8px">
-        <button class="btn btn-secondary btn-sm" onclick="modificaProdotto('${f.path}')">✏️ Modifica</button>
-        <button class="btn btn-danger btn-sm" onclick="eliminaProdotto('${f.path}','${f.sha}')">🗑</button>
+        <button class="btn btn-secondary btn-sm" onclick="modificaProdotto('${_esc(p.id)}')">✏️ Modifica</button>
+        <button class="btn btn-danger btn-sm" onclick="eliminaProdotto('${_esc(p.id)}')">🗑</button>
       </div>
     </div>`).join('');
-
-  // Frecce paginazione — mostrate solo se ci sono piu' pagine di quante ne servono per 1 sola vista
   if(totalePagine<=1){pagEl.innerHTML='';return;}
   pagEl.innerHTML=`
     <button class="btn btn-secondary btn-sm" ${_prodPaginaCorrente<=1?'disabled':''} onclick="vaiAPaginaProdotti(${_prodPaginaCorrente-1})">← Precedente</button>
@@ -2210,34 +2243,23 @@ function _renderListaProdotti(files){
   `;
 }
 
-function vaiAPaginaProdotti(n){
-  _prodPaginaCorrente=n;
-  const cached=JSON.parse(localStorage.getItem('cms_cache_prodotti')||'null');
-  if(cached)_renderListaProdotti(cached);
-}
+function vaiAPaginaProdotti(n){_prodPaginaCorrente=n;_renderListaProdotti();}
 
-async function modificaProdotto(path){
-  const res=await ghGet(path);
-  if(!res.ok)return;
-  const d=await res.json();
-  const raw=dec(d.content);
-  // parse frontmatter
-  const fm=raw.match(/^---\n([\s\S]+?)\n---\n?([\s\S]*)$/);
-  if(!fm)return;
-  const meta={};
-  fm[1].split('\n').forEach(l=>{const m=l.match(/^(\w+):\s*"?(.+?)"?\s*$/);if(m)meta[m[1]]=m[2];});
-  document.getElementById('prod-titolo').value=meta.title||'';
-  document.getElementById('prod-prezzo').value=meta.price||'';
-  document.getElementById('prod-stock').value=meta.stock||'';
-  document.getElementById('prod-sku').value=meta.sku||'';
-  document.getElementById('prod-immagine').value=meta.image||'';
-  document.getElementById('prod-categoria').value=meta.category||'';
-  document.getElementById('prod-tipo').value=meta.tipo||'fisico';
-  document.getElementById('prod-description').value=meta.description||''; SeoPanel.set('seo-prod',SeoPanel.read(fm[1]));
-  document.getElementById('prod-corpo').value=fm[2].trim();
-  _prodPath=path;
+function modificaProdotto(id){
+  const p=_prodLista.find(x=>x.id===id);
+  if(!p)return;
+  const set=(k,v)=>{document.getElementById(k).value=v==null?'':v;};
+  set('prod-titolo',p.nome);
+  set('prod-prezzo',(p.prezzo_centesimi/100).toFixed(2));
+  set('prod-stock',p.stock);set('prod-sku',p.sku);
+  set('prod-immagine',p.immagine);
+  _riempiSelCat();set('prod-categoria',p.categoria);
+  set('prod-tipo',p.tipo||'fisico');
+  set('prod-description',p.descrizione);
+  set('prod-corpo',p.descrizione_completa);
+  SeoPanel.set('seo-prod',{});
+  _prodPath=id;
   showMsg('msg-prod','','');
-  // Switch view: nasconde la lista, mostra l'editor gia' precompilato (stile WordPress)
   document.getElementById('prod-editor-title').textContent='Modifica prodotto';
   document.getElementById('prod-lista-view').style.display='none';
   document.getElementById('prod-editor-view').style.display='block';
@@ -2246,35 +2268,65 @@ async function modificaProdotto(path){
 
 async function pubblicaProdotto(){
   if(!tok())return showMsg('msg-prod','⚠️ Token mancante.','err');
-  const titolo=document.getElementById('prod-titolo').value.trim();
+  const v=id=>document.getElementById(id).value.trim();
+  const titolo=v('prod-titolo');
   if(!titolo)return showMsg('msg-prod','⚠️ Titolo obbligatorio.','err');
-  const prezzo=document.getElementById('prod-prezzo').value.trim();
-  const stock=document.getElementById('prod-stock').value.trim();
-  const sku=document.getElementById('prod-sku').value.trim();
-  const immagine=document.getElementById('prod-immagine').value.trim();
+  const prezzoN=parseFloat(v('prod-prezzo').replace(',','.'));
+  if(isNaN(prezzoN)||prezzoN<0)return showMsg('msg-prod','⚠️ Prezzo non valido (es. 59 o 59,90).','err');
   const categoria=document.getElementById('prod-categoria').value;
+  if(!categoria)return showMsg('msg-prod','⚠️ Scegli una categoria.','err');
   const tipo=document.getElementById('prod-tipo').value||'fisico';
-  const corpo=document.getElementById('prod-corpo').value.trim();
-  const slug=titolo.toLowerCase().replace(/[àáâ]/g,'a').replace(/[èéê]/g,'e').replace(/[ìí]/g,'i').replace(/[òó]/g,'o').replace(/[ùú]/g,'u').replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-');
-  const path=_prodPath||`_products/${slug}.md`;
-  let sha=undefined;
-  if(_prodPath){const r=await ghGet(_prodPath);if(r.ok){const d=await r.json();sha=d.sha;}}
-  const description=document.getElementById('prod-description').value.trim();
-  const md=`---\ntitle: "${titolo}"\nprice: ${prezzo||0}\nstock: ${stock||''}\nsku: "${sku}"\ncategory: "${categoria}"\ntipo: "${tipo}"\nimage: "${immagine}"\ndescription: "${description}"\n${SeoPanel.lines('seo-prod')}last_modified_at: ${Auto.nowIso()}\nlayout: product\n---\n${corpo}`;
+  const stock=v('prod-stock'),sku=v('prod-sku'),im=_imgRel(v('prod-immagine'));
+  const descr=v('prod-description'),corpo=v('prod-corpo');
   showMsg('msg-prod','⏳ Salvataggio...','');
-  const res=await ghPut(path,`Prodotto: ${titolo}`,md,sha);
-  if(res.ok){showMsg('msg-prod','✅ Prodotto salvato!','ok');startDeployPolling();_prodPath=path;caricaProdotti();}
-  else{const j=await res.json();showMsg('msg-prod','❌ '+j.message,'err');}
+  try{
+    const x=await _catGet();const d=x.d;d.prodotti=d.prodotti||[];d.categorie=d.categorie||[];
+    if(!d.categorie.some(c=>c.id===categoria))throw new Error('Categoria "'+categoria+'" non trovata nel catalogo.');
+    let p=_prodPath?d.prodotti.find(y=>y.id===_prodPath):null;
+    const nuovo=!p;
+    if(nuovo){
+      const base=_slug(titolo)||'prodotto';let id=base,i=2;
+      while(id==='categoria'||d.prodotti.some(y=>y.id===id)||d.categorie.some(c=>c.id===id)){id=base+'-'+(i++);}
+      p={tipo:tipo,id:id,nome:titolo,categoria:categoria,prezzo_centesimi:0,descrizione:'',descrizione_completa:'',immagine:'',icona:'',visibile:true};
+    }
+    p.tipo=tipo;p.nome=titolo;p.categoria=categoria;
+    if(p.categoria2===categoria)delete p.categoria2;
+    p.prezzo_centesimi=Math.round(prezzoN*100);
+    p.descrizione=descr||titolo;
+    p.descrizione_completa=corpo||p.descrizione;
+    if(im){const old=p.immagine||'';p.immagine=(old.split('?')[0]===im)?old:im+'?v=1';}
+    if(stock)p.stock=stock;else delete p.stock;
+    if(sku)p.sku=sku;else delete p.sku;
+    if(nuovo){
+      await _putFile('_negozio/'+p.id+'.md','Prodotto: '+titolo,_pagProd(p,false));
+      if(await _haEn())await _putFile('en/negozio/'+p.id+'.md','Product: '+titolo,_pagProd(p,true));
+      d.prodotti.push(p);
+    }else{
+      const r=await _gh('_negozio/'+p.id+'.md');
+      if(r.ok){
+        const j=await r.json();let t=dec(j.content);const o=t;
+        t=t.replace(/^title:.*$/m,'title: "'+_yq(titolo)+'"').replace(/^description:.*$/m,'description: "'+_yq(p.descrizione.slice(0,160))+'"');
+        if(t!==o){const rr=await ghPut('_negozio/'+p.id+'.md','Prodotto: '+titolo,t,j.sha);if(!rr.ok)throw new Error('Pagina prodotto: '+rr.status);}
+      }else{await _putFile('_negozio/'+p.id+'.md','Prodotto: '+titolo,_pagProd(p,false));}
+    }
+    await _catPut(d,x.sha,(nuovo?'Prodotto: ':'Modifica prodotto: ')+titolo);
+    _prodPath=p.id;_prodLista=d.prodotti;_shopcats=d.categorie;
+    showMsg('msg-prod','✅ Prodotto salvato!','ok');startDeployPolling();
+  }catch(e){showMsg('msg-prod','❌ '+(e.message||e),'err');}
 }
 
-async function eliminaProdotto(path,sha){
+async function eliminaProdotto(id){
   if(!confirm('Eliminare questo prodotto?'))return;
   if(!tok())return;
-  const res=await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`,{
-    method:'DELETE',headers:{'Authorization':`token ${tok()}`,'Content-Type':'application/json'},
-    body:JSON.stringify({message:`Elimina prodotto ${path}`,sha})
-  });
-  if(res.ok){showMsg('msg-prod','✅ Eliminato!','ok');caricaProdotti();startDeployPolling();}
+  try{
+    const x=await _catGet();const d=x.d;
+    if(!(d.prodotti||[]).some(p=>p.id===id))throw new Error('Prodotto non trovato.');
+    d.prodotti=d.prodotti.filter(p=>p.id!==id);
+    await _catPut(d,x.sha,'Elimina prodotto: '+id);
+    await _delFile('_negozio/'+id+'.md','Elimina prodotto '+id);
+    await _delFile('en/negozio/'+id+'.md','Elimina prodotto '+id);
+    showMsg('msg-prod','✅ Eliminato!','ok');caricaProdotti();startDeployPolling();
+  }catch(e){showMsg('msg-prod','❌ '+(e.message||e),'err');}
 }
 
 // ============ INTEGRAZIONI ============
