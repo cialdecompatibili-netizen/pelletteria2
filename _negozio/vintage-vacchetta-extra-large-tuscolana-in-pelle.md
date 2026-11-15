@@ -1,8 +1,8 @@
 ---
 layout: negozio-prodotto
-title: "Vintage vacchetta extra large Tuscolana in pelle"
+title: "Borsa a spalla Tuscolana in pelle"
 pid: vintage-vacchetta-extra-large-tuscolana-in-pelle
 permalink: /negozio/vintage-vacchetta-extra-large-tuscolana-in-pelle/
-description: "Un dettaglio che fa la differenza: piccolo, essenziale, scelto da chi riconosce la bellezza nelle cose di ogni giorno."
+description: "Ampia e morbida, una borsa a spalla che porta tutto il giorno senza perdere eleganza."
 ref: shop-prod-vintage-vacchetta-extra-large-tuscolana-in-pelle
 ---
