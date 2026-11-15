@@ -155,6 +155,17 @@
       }
     },
     {
+      "id": "donna-piccola-pelletteria",
+      "nome": "Piccola pelletteria",
+      "icona": "",
+      "genitore": "donna",
+      "tr": {
+        "en": {
+          "nome": "Small leather goods"
+        }
+      }
+    },
+    {
       "id": "donna-charm",
       "nome": "Portachiavi e charm",
       "icona": "",
@@ -325,6 +336,50 @@
       "tr": {
         "en": {
           "nome": "For the home"
+        }
+      }
+    },
+    {
+      "id": "casa-living",
+      "nome": "Living",
+      "icona": "",
+      "genitore": "casa",
+      "tr": {
+        "en": {
+          "nome": "Living"
+        }
+      }
+    },
+    {
+      "id": "casa-illuminazione",
+      "nome": "Illuminazione",
+      "icona": "",
+      "genitore": "casa",
+      "tr": {
+        "en": {
+          "nome": "Lighting"
+        }
+      }
+    },
+    {
+      "id": "casa-tessili",
+      "nome": "Tessili e cuscini",
+      "icona": "",
+      "genitore": "casa",
+      "tr": {
+        "en": {
+          "nome": "Textiles and cushions"
+        }
+      }
+    },
+    {
+      "id": "casa-decor",
+      "nome": "Decor e complementi",
+      "icona": "",
+      "genitore": "casa",
+      "tr": {
+        "en": {
+          "nome": "Decor and accessories"
         }
       }
     },

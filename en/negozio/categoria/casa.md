@@ -4,7 +4,7 @@ title: "For the home"
 cid: casa
 ref: shop-cat-casa
 permalink: /en/shop/category/home/
-description: "Leather accessories for the home and the desk."
+description: "Living, furniture, lighting and leather accessories for the home."
 lang: en
 locale: en
 tr: tradotto
