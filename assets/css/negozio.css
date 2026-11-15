@@ -403,4 +403,9 @@ Testo e azioni hanno il loro padding. Per ingrandire/ridurre: cambia la prima co
    Per cambiare l'aspetto di TUTTI i bottoni categoria si tocca solo questo blocco. NON aggiungere regole separate per .nz-sub o per i reparti. */
 #negozio .nz-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem; }
 #negozio .nz-pills .nz-cpill { display: inline-block; text-align: center; padding: .25rem .8rem; }
+/* GERARCHIA a colpo d'occhio: i REPARTI (categorie madre, prima riga) sono grandi, in maiuscolo, pieni e con ombra; le SOTTOCATEGORIE (.nz-sub) restano piccole, chiare e solo con il bordo. */
+#negozio .nz-pills:not(.nz-sub) .nz-cpill { padding: .5rem 1.3rem; font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; background: #f4ece0; border-color: #d9c3a0; box-shadow: 0 3px 8px rgba(80,54,41,.18); }
+#negozio .nz-pills:not(.nz-sub) .nz-cpill:hover { box-shadow: 0 5px 12px rgba(80,54,41,.25); transform: translateY(-1px); }
+#negozio .nz-pills:not(.nz-sub) .nz-cpill.on { background: var(--nz-tema); border-color: var(--nz-tema); color: #fff; box-shadow: 0 4px 10px rgba(80,54,41,.35); }
+#negozio .nz-pills.nz-sub .nz-cpill { background: transparent; box-shadow: none; font-size: .85rem; font-weight: 400; }
 .nz-lb{position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;cursor:zoom-out}.nz-lb img{max-width:100vw;max-height:100vh;width:auto;height:auto;object-fit:contain}.nz-lb span{position:absolute;top:10px;right:20px;color:#fff;font-size:42px;line-height:1}
