@@ -505,6 +505,24 @@
         "acquisto": 70.81,
         "foto": "lusso"
       }
+    },
+    {
+      "tipo": "fisico",
+      "id": "vintage-vacchetta-extra-large-tuscolana-in-pelle",
+      "nome": "Vintage vacchetta extra large Tuscolana in pelle",
+      "categoria": "donna-borse-spalla",
+      "prezzo_centesimi": 50000,
+      "descrizione": "Un dettaglio che fa la differenza: piccolo, essenziale, scelto da chi riconosce la bellezza nelle cose di ogni giorno.",
+      "descrizione_completa": "Ci sono oggetti che non si possiedono: si abitano. Parla attraverso la grana, il profumo della concia e la precisione dei margini, senza bisogno di clamore: una pelle che invecchia bene è la sola firma che conta. Un dettaglio che fa la differenza: piccolo, essenziale, scelto da chi riconosce la bellezza nelle cose di ogni giorno.\n\nCaratteristiche e misure\nDescrizione del prodotto:\nQuando non vengono utilizzati, conservare gli articoli in pelle in un luogo asciutto e ben ventilato per evitare la formazione di muffa.\nPer la manutenzione ordinaria, pulire la superficie con un panno morbido e asciutto per rimuovere polvere e sporco.\nPer una pulizia profonda, utilizzare un detergente specifico per la pelle. Evitare l'uso di acqua, poiché potrebbe macchiare la pelle.\nTenere la pelle lontana dall'esposizione prolungata alla luce solare diretta e al calore, poiché ciò può causarne lo scolorimento e l'essiccazione.\nAltezza (maniglia esclusa): 23 cm",
+      "immagine": "assets/images/prodotti/vintage-vacchetta-extra-large-tuscolana-in-pelle.webp?v=1",
+      "icona": "",
+      "visibile": true,
+      "collezione": "",
+      "fonte": {
+        "url": "https://www.etsy.com/it/listing/1801244540/borsa-a-mano-vintage-in-pelle-di",
+        "acquisto": 163.58,
+        "foto": "lusso"
+      }
     }
   ]
 }
