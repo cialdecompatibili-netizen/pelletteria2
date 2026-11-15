@@ -133,6 +133,39 @@
       }
     },
     {
+      "id": "donna-foulard",
+      "nome": "Foulard e sciarpe",
+      "icona": "",
+      "genitore": "donna",
+      "tr": {
+        "en": {
+          "nome": "Scarves and foulards"
+        }
+      }
+    },
+    {
+      "id": "donna-occhiali",
+      "nome": "Occhiali",
+      "icona": "",
+      "genitore": "donna",
+      "tr": {
+        "en": {
+          "nome": "Eyewear"
+        }
+      }
+    },
+    {
+      "id": "donna-charm",
+      "nome": "Portachiavi e charm",
+      "icona": "",
+      "genitore": "donna",
+      "tr": {
+        "en": {
+          "nome": "Key rings and bag charms"
+        }
+      }
+    },
+    {
       "id": "donna-accessori",
       "nome": "Guanti e accessori",
       "icona": "",
@@ -242,6 +275,39 @@
       }
     },
     {
+      "id": "uomo-sciarpe",
+      "nome": "Sciarpe e cappelli",
+      "icona": "",
+      "genitore": "uomo",
+      "tr": {
+        "en": {
+          "nome": "Scarves and hats"
+        }
+      }
+    },
+    {
+      "id": "uomo-occhiali",
+      "nome": "Occhiali",
+      "icona": "",
+      "genitore": "uomo",
+      "tr": {
+        "en": {
+          "nome": "Eyewear"
+        }
+      }
+    },
+    {
+      "id": "uomo-portachiavi",
+      "nome": "Portachiavi e piccola pelletteria",
+      "icona": "",
+      "genitore": "uomo",
+      "tr": {
+        "en": {
+          "nome": "Key rings and small leather goods"
+        }
+      }
+    },
+    {
       "id": "uomo-accessori",
       "nome": "Guanti e accessori",
       "icona": "",
@@ -249,6 +315,92 @@
       "tr": {
         "en": {
           "nome": "Gloves and accessories"
+        }
+      }
+    },
+    {
+      "id": "casa",
+      "nome": "Casa",
+      "icona": "",
+      "tr": {
+        "en": {
+          "nome": "For the home"
+        }
+      }
+    },
+    {
+      "id": "casa-scrivania",
+      "nome": "Scrivania e ufficio",
+      "icona": "",
+      "genitore": "casa",
+      "tr": {
+        "en": {
+          "nome": "Desk and office"
+        }
+      }
+    },
+    {
+      "id": "casa-vassoi",
+      "nome": "Svuotatasche e vassoi",
+      "icona": "",
+      "genitore": "casa",
+      "tr": {
+        "en": {
+          "nome": "Trays and valet trays"
+        }
+      }
+    },
+    {
+      "id": "regali",
+      "nome": "Regali",
+      "icona": "",
+      "tr": {
+        "en": {
+          "nome": "Gifts"
+        }
+      }
+    },
+    {
+      "id": "regali-lei",
+      "nome": "Per lei",
+      "icona": "",
+      "genitore": "regali",
+      "tr": {
+        "en": {
+          "nome": "For her"
+        }
+      }
+    },
+    {
+      "id": "regali-lui",
+      "nome": "Per lui",
+      "icona": "",
+      "genitore": "regali",
+      "tr": {
+        "en": {
+          "nome": "For him"
+        }
+      }
+    },
+    {
+      "id": "regali-personalizzati",
+      "nome": "Personalizzabili con logo",
+      "icona": "",
+      "genitore": "regali",
+      "tr": {
+        "en": {
+          "nome": "Personalised with logo"
+        }
+      }
+    },
+    {
+      "nome": "Borse a tracolla in pelle donna",
+      "id": "borse-a-tracolla-in-pelle",
+      "icona": "",
+      "genitore": "donna",
+      "tr": {
+        "en": {
+          "nome": "Leather shoulder bags women"
         }
       }
     }
