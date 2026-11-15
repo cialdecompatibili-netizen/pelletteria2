@@ -75,3 +75,10 @@ Lezioni dalla migrazione "pelletteria" -> "pelletteria2" (24/10/2026)
 - Il template ha molti file non committati: modificare il template solo nel working tree e NON usare `pubblica.ps1 -Tutto` li'.
 
 - TEMA PELLE (24/10/2026): niente colori ghiaccio/teal hardcoded; palette in _data/tema.json (accent #8a6a3a, accent_dark #503629). Sfondo home = assets/images/leather-hero.jpg generato da automation/genera_texture.py; logo da automation/genera_logo.py. Footer: credito webtomars.it in _includes/footer/custom.html (site.footer_text lo sovrascrive).
+
+
+## Filosofia: UNA regola, vale ovunque (15/11/2026)
+- Ogni aspetto ripetuto (bottoni categoria, voci di menu, liste) si definisce in UN SOLO punto del CSS/layout e si applica da solo a tutte le pagine e a tutti i reparti. Se serve cambiare l'aspetto, si tocca quel blocco e basta: mai regole separate per singola pagina, singolo reparto o singola lista.
+- Pillole categoria (reparti + sottocategorie): un solo blocco in assets/css/negozio.css ("PILLOLE CATEGORIA"): larghe quanto il testo, a capo automatico, centrate, compatte. La pagina non deve allungarsi.
+- Tendine del menu (assets/css/menu.css): la tendina larga e' compatta su desktop; i sottomenu con 6-8 voci usano le 2 colonne simmetriche. Una modifica li' vale per Donna, Uomo, Casa, Regali.
+- Nuove categorie: si aggiungono SOLO in _data/catalogo.json + le due pagine (it/en) + sottomenu IT/EN; l'aspetto e' gia' automatico. rivendita.py inventa una categoria se non la trova: dopo ogni prodotto pilota rimappare alla categoria dell'albero e cancellare quella inventata.
