@@ -26,6 +26,12 @@ Women:
     url: "/en/shop/category/women-jackets/"
   - title: "Shoes and boots"
     url: "/en/shop/category/women-shoes/"
+  - title: "Scarves and foulards"
+    url: "/en/shop/category/women-scarves/"
+  - title: "Eyewear"
+    url: "/en/shop/category/women-eyewear/"
+  - title: "Key rings and bag charms"
+    url: "/en/shop/category/women-charms/"
   - title: "Gloves and accessories"
     url: "/en/shop/category/women-accessories/"
 
@@ -49,5 +55,31 @@ Men:
     url: "/en/shop/category/men-jackets/"
   - title: "Shoes and boots"
     url: "/en/shop/category/men-shoes/"
+  - title: "Scarves and hats"
+    url: "/en/shop/category/men-scarves-hats/"
+  - title: "Eyewear"
+    url: "/en/shop/category/men-eyewear/"
+  - title: "Key rings and small leather goods"
+    url: "/en/shop/category/men-keyrings/"
   - title: "Gloves and accessories"
     url: "/en/shop/category/men-accessories/"
+
+For the home:
+  - title: "All for the home"
+    url: "/en/shop/category/home/"
+  - divider: true
+  - title: "Desk and office"
+    url: "/en/shop/category/home-desk/"
+  - title: "Trays and valet trays"
+    url: "/en/shop/category/home-trays/"
+
+Gifts:
+  - title: "All gifts"
+    url: "/en/shop/category/gifts/"
+  - divider: true
+  - title: "For her"
+    url: "/en/shop/category/gifts-her/"
+  - title: "For him"
+    url: "/en/shop/category/gifts-him/"
+  - title: "Personalised with logo"
+    url: "/en/shop/category/gifts-personalised/"

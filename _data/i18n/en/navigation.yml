@@ -5,6 +5,10 @@ main:
     url: /en/shop/category/women/
   - title: "Men"
     url: /en/shop/category/men/
+  - title: "For the home"
+    url: /en/shop/category/home/
+  - title: "Gifts"
+    url: /en/shop/category/gifts/
   - title: "Blog"
     url: /en/blog/
   - title: "Contact"

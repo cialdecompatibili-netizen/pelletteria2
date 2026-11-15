@@ -58,6 +58,12 @@ Donna:
     url: "/negozio/categoria/donna-giacche/"
   - title: "Scarpe e stivali"
     url: "/negozio/categoria/donna-scarpe/"
+  - title: "Foulard e sciarpe"
+    url: "/negozio/categoria/donna-foulard/"
+  - title: "Occhiali"
+    url: "/negozio/categoria/donna-occhiali/"
+  - title: "Portachiavi e charm"
+    url: "/negozio/categoria/donna-charm/"
   - title: "Guanti e accessori"
     url: "/negozio/categoria/donna-accessori/"
 
@@ -81,5 +87,31 @@ Uomo:
     url: "/negozio/categoria/uomo-giacche/"
   - title: "Scarpe e stivali"
     url: "/negozio/categoria/uomo-scarpe/"
+  - title: "Sciarpe e cappelli"
+    url: "/negozio/categoria/uomo-sciarpe/"
+  - title: "Occhiali"
+    url: "/negozio/categoria/uomo-occhiali/"
+  - title: "Portachiavi e piccola pelletteria"
+    url: "/negozio/categoria/uomo-portachiavi/"
   - title: "Guanti e accessori"
     url: "/negozio/categoria/uomo-accessori/"
+
+Casa:
+  - title: "Tutta la casa"
+    url: "/negozio/categoria/casa/"
+  - divider: true
+  - title: "Scrivania e ufficio"
+    url: "/negozio/categoria/casa-scrivania/"
+  - title: "Svuotatasche e vassoi"
+    url: "/negozio/categoria/casa-vassoi/"
+
+Regali:
+  - title: "Tutti i regali"
+    url: "/negozio/categoria/regali/"
+  - divider: true
+  - title: "Per lei"
+    url: "/negozio/categoria/regali-lei/"
+  - title: "Per lui"
+    url: "/negozio/categoria/regali-lui/"
+  - title: "Personalizzabili con logo"
+    url: "/negozio/categoria/regali-personalizzati/"

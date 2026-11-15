@@ -392,17 +392,6 @@
           "nome": "Personalised with logo"
         }
       }
-    },
-    {
-      "nome": "Borse a tracolla in pelle donna",
-      "id": "borse-a-tracolla-in-pelle",
-      "icona": "",
-      "genitore": "donna",
-      "tr": {
-        "en": {
-          "nome": "Leather shoulder bags women"
-        }
-      }
     }
   ],
   "prodotti": [
@@ -448,7 +437,7 @@
       "tipo": "fisico",
       "id": "mini-borsa-a-tracolla-ripetta-in-pelle",
       "nome": "Mini borsa a tracolla Ripetta in pelle",
-      "categoria": "borse-a-tracolla-in-pelle",
+      "categoria": "donna-tracolle",
       "prezzo_centesimi": 22000,
       "descrizione": "Si porta sulla spalla come un'abitudine felice: mai invadente, sempre al posto giusto, con una presenza che si nota senza alzare la voce.",
       "descrizione_completa": "Roma conosce il valore del tempo. Si ammorbidisce con l'uso, si scurisce alla luce, prende la forma di chi la porta: è la lezione che le grandi maison europee hanno trasformato in un mestiere. Si porta sulla spalla come un'abitudine felice: mai invadente, sempre al posto giusto, con una presenza che si nota senza alzare la voce.\n\nCaratteristiche e misure\nAltezza: 19 cm\nLarghezza: 23 cm",

@@ -14,6 +14,10 @@ main:
     url: /negozio/categoria/donna/
   - title: "Uomo"
     url: /negozio/categoria/uomo/
+  - title: "Casa"
+    url: /negozio/categoria/casa/
+  - title: "Regali"
+    url: /negozio/categoria/regali/
   - title: "Blog"
     url: /blog/
   - title: "Contatti"
